@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "root",
+    "password": "db_root_password",
+    "database": "pilar",
+    "host": "127.0.0.1",
+    "port": 4307,
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "db_root_password",
+    "database": "pilar",
+    "host": "127.0.0.1",
+    "port": 4307,
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "db_root_password",
+    "database": "pilar",
+    "host": "127.0.0.1",
+    "port": 4307,
+    "dialect": "mysql"
+  }
+}

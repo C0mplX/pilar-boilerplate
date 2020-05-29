@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "pilar-server": "^1.0.2",
+    "pilar-server": "^1.0.12",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "global": "^4.4.0",
@@ -21,10 +21,12 @@
     "sequelize": "^5.21.7",
     "sequelize-cli": "^5.5.1",
     "sequelize-typescript": "^1.1.0",
-    "ts-node": "^8.9.1"
+    "ts-node": "^8.9.1",
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/jsonwebtoken": "^8.5.0",
     "@types/body-parser": "^1.19.0",
     "@types/cors": "^2.8.6",
     "@types/uuid": "^7.0.3",
