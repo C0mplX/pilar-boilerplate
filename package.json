@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "pilar-server": "^1.0.12",
+    "pilar-server": "^1.1.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "global": "^4.4.0",

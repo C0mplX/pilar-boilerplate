@@ -1569,10 +1569,10 @@ picomatch@^2.0.4, picomatch@^2.2.1:
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.2.2.tgz#21f333e9b6b8eaff02468f5146ea406d345f4dad"
   integrity sha512-q0M/9eZHzmr0AulXyPwNfZjtwZ/RBZlbN3K3CErVrk50T2ASYI7Bye0EvekFY3IP1Nt2DHu0re+V2ZHIpMkuWg==
 
-pilar-server@^1.0.12:
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/pilar-server/-/pilar-server-1.0.12.tgz#f97c15fd57d4b4d5c89efdf26af18a259e9f3ffb"
-  integrity sha512-AmcnkB0cDnBskCDBpnUwkvaDfKeQ8eDwJs154clmMZhqlRlTit0/7alJ7/CZdJZFPNBxshBzA1aNrXANTE01Hg==
+pilar-server@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/pilar-server/-/pilar-server-1.1.0.tgz#2873282761251fae7686dced19a827211900ab05"
+  integrity sha512-d9n0FUeM2fdlpbG9jqR7F++QHzoPXosAqf+matne7dASC3Sz3m2NLCCgrh5n2h1ffi2Oa88uF811op5Njml1yw==
   dependencies:
     body-parser "^1.19.0"
     cors "^2.8.5"
