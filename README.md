@@ -19,7 +19,8 @@ When the database is setup you can simply run
 
 `$ yarn install`
 
-Then run 
+Then run
+ 
 `$ yarn start`
 
 Your server wil then start to run on PORT 3001. You can change this in the `./src/server.ts`
