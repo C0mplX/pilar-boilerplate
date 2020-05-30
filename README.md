@@ -5,14 +5,14 @@ A starter project to use with the polar-server npm package. It inlcudes the foll
 
 ## Setup local development
 You need to setup a database. You can descide your self how you want to do this, but the
-easiest way is by docker. 
+easiest way is using docker. 
 
-#### Run dartabase in docker
+#### Run database with docker
 `$ docker run --name pilar_db -p 4307:3306 -v pilar_db:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=db_root_password -e MYSQL_USER=auth_gate_db_user -e MYSQL_PASSWORD=auth_gate_db_password -d mysql --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_c`
 
 The docker command above is setup to use the supported env file included in the project. Simply copy the
-.env-sample and rename it .env, thats it! Hvae you change something in the docker command like db password
-or are running a differend database remember to update your .env accordingly. 
+.env-sample and rename it .env, thats it! if you have change something in the docker command, like db password
+or are running a different database remember to update your .env accordingly. 
 
 #### Install dependencies
 When the database is setup you can simply run
@@ -33,7 +33,7 @@ The project consists of three main parts. `routes`, `middlewares` and `models`.
 This is where you register all your routes. The project allready contains a user route
 so use that as an example to build your own routes. All routes are classes that implements a
 base route from `pilar-server`. Its important that all routes look like this in order to
-work propperly `class UserRoutes extends BaseRouter implements IBaseRouter`;
+work propperly `class UserRoutes extends BaseRouter implements IBaseRouter`
 
 #### Models 
 The models as written using [sequelize-typescript](https://www.npmjs.com/package/sequelize-typescript)
