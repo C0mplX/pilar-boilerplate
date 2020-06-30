@@ -39,7 +39,7 @@ class UserRoutes extends BaseRouter implements IBaseRouter {
 
   private static async login(req: Request, res: Response) {
     const userData = req.body as ILoginParams;
-    validate<ILoginParams>(userData, validateLoginParams, res, () => {
+    validate<ILoginParams>(userData, validateLoginParams, res, async () => {
       try {
         const existingUser = await User.scope("full").findOne({
           where: {email: userData.email}
@@ -70,7 +70,7 @@ class UserRoutes extends BaseRouter implements IBaseRouter {
 
   private static async signup(req: Request, res: Response) {
     const userData = req.body as ISignupParams;
-    validate<ISignupParams>(userData, validateSignupParams, res, () => {
+    validate<ISignupParams>(userData, validateSignupParams, res, async () => {
       const existingUser = await User.findOne({where: {email: userData.email}});
       try {
         if(existingUser === null) {
