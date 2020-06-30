@@ -39,53 +39,55 @@ class UserRoutes extends BaseRouter implements IBaseRouter {
 
   private static async login(req: Request, res: Response) {
     const userData = req.body as ILoginParams;
-    validate<ILoginParams>(userData, validateLoginParams, res);
-    try {
-      const existingUser = await User.scope("full").findOne({
-        where: {email: userData.email}
-      });
-      if(existingUser) {
-        return bcryptjs.compare(userData.password, existingUser.password, (err, result) => {
-          if(err) {
-            serverError(res, err);
-          }
-          if(result === true) {
-            const tokenPayload = {id: existingUser.id, email: existingUser.email};
-            const longLivedToken  = issueLongLivedToken(tokenPayload);
-            const accessToken     = issueAccessToken(longLivedToken, tokenPayload);
-            if(accessToken) {
-              return res.send(new SuccessResponse(200, {accessToken, longLivedToken}));
-            }
-            return res.status(400).json(new ErrorResponse(401, {message: `INVALID_CREDENTIALS`}));
-          }
-          return res.status(400).json(new ErrorResponse(400, {message: `WRONG_PASSWORD`}));
+    validate<ILoginParams>(userData, validateLoginParams, res, () => {
+      try {
+        const existingUser = await User.scope("full").findOne({
+          where: {email: userData.email}
         });
+        if(existingUser) {
+          return bcryptjs.compare(userData.password, existingUser.password, (err, result) => {
+            if(err) {
+              serverError(res, err);
+            }
+            if(result === true) {
+              const tokenPayload = {id: existingUser.id, email: existingUser.email};
+              const longLivedToken  = issueLongLivedToken(tokenPayload);
+              const accessToken     = issueAccessToken(longLivedToken, tokenPayload);
+              if(accessToken) {
+                return res.send(new SuccessResponse(200, {accessToken, longLivedToken}));
+              }
+              return res.status(400).json(new ErrorResponse(401, {message: `INVALID_CREDENTIALS`}));
+            }
+            return res.status(400).json(new ErrorResponse(400, {message: `WRONG_PASSWORD`}));
+          });
+        }
+        res.status(404).json(new ErrorResponse(404, {message: 'USER_NOT_FOUND'}));
+      } catch (e) {
+        serverError(res, e);
       }
-      res.status(404).json(new ErrorResponse(404, {message: 'USER_NOT_FOUND'}));
-    } catch (e) {
-      serverError(res, e);
-    }
+    });
   }
 
   private static async signup(req: Request, res: Response) {
     const userData = req.body as ISignupParams;
-    validate<ISignupParams>(userData, validateSignupParams, res);
-    const existingUser = await User.findOne({where: {email: userData.email}});
-    try {
-      if(existingUser === null) {
-        return bcryptjs.genSalt(10, (saltErr, salt) => {
-          bcryptjs.hash(userData.password, salt, async (err, hash) => {
-            userData.password = hash;
-            const newUser = await User.create(userData);
-            newUser.password = "";
-            res.send(new SuccessResponse(200, {user: newUser}));
+    validate<ISignupParams>(userData, validateSignupParams, res, () => {
+      const existingUser = await User.findOne({where: {email: userData.email}});
+      try {
+        if(existingUser === null) {
+          return bcryptjs.genSalt(10, (saltErr, salt) => {
+            bcryptjs.hash(userData.password, salt, async (err, hash) => {
+              userData.password = hash;
+              const newUser = await User.create(userData);
+              newUser.password = "";
+              res.send(new SuccessResponse(200, {user: newUser}));
+            });
           });
-        });
+        }
+        res.status(400).json(new ErrorResponse(400, {message: 'USER_EXISTS'}));
+      } catch (e) {
+        serverError(res, e);
       }
-      res.status(400).json(new ErrorResponse(400, {message: 'USER_EXISTS'}));
-    } catch (e) {
-      serverError(res, e);
-    }
+    });
   }
 
   private static async issueAccessToken(req: Request, res: IExtendedResponse) {
